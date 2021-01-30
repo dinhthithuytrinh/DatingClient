@@ -18,7 +18,7 @@ import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-
+import { AuthGuard } from './_guards/auth.guard';
 
 @NgModule({
   declarations: [
