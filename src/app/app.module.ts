@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AccountService } from './_services/account.service';
+import { MembersService } from './_services/members.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -52,6 +53,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
   ],
   providers: [
     AccountService,
+    MembersService,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
