@@ -11,7 +11,7 @@
             <input type="radio" value='female' formControlName="gender" class="ml-3"> Female
         </label>
     </div>
-    
+
     <div class="form-group">
         <!-- name="username" [(ngModel)]="model.username" -->
         <input
@@ -34,12 +34,18 @@
     </div>
 
     <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
         <input
-            [class.is-invalid]='registerForm.get("dateOfBirth").errors && registerForm.get("dateOfBirth").touched'
-            type="text" 
-            class="form-control" 
-            formControlName='dateOfBirth' 
-            placeholder="Date Of Birth">
+            [class.is-invalid]='registerForm.get("dateOfBirth").errors && registerForm.get("dateOfBirth").touched'    
+            formControlName="dateOfBirth"
+            id="dateOfBirth"
+            type="text"
+            placeholder="Date of birth"
+            class="form-control"
+            [bsConfig]="{ containerClass: 'theme-red', isAnimated: true, dateInputFormat: 'DD MMMM YYYY'}"
+            bsDatepicker>
+            <!-- [ngClass]="{ 'is-invalid': registerForm.get("dateOfBirth").errors && registerForm.get("dateOfBirth").touched }"  -->
+            
         <div class="invalid-feedback">Please enter Date Of Birth</div>
     </div>
 
@@ -91,5 +97,5 @@
     </div>
 </form>
 
-<p>Form value: {{ registerForm.value | json }}</p>
+<p>Value: {{ registerForm.value | json }}</p>
 <p>Form status: {{ registerForm.status | json }}</p>
