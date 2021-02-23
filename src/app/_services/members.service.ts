@@ -13,27 +13,41 @@ import { PaginatedResult, Pagination } from '../_models/pagination';
 export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
-  paginatedResult: PaginatedResult<Member[]> = new PaginatedResult<Member[]>()
-
+  
   constructor(private http: HttpClient) { }
 
-  getMembers(page?: number, itemsPerPage?: number) {
+  getMembers(UserParams) {
+    let params = this.getPaginationHeaders(UserParams.pageNumber, UserParams.pageSize);
+
+    params = params.append('minAge', UserParams.minAge.toString());
+    params = params.append('maxAge', UserParams.maxAge.toString());
+    params = params.append('gender', UserParams.gender);
+    
+    return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params);
+  }
+
+  private getPaginationHeaders(pageNumber: number, pageSize: number) {
     let params = new HttpParams();
 
-    if (page !== null && itemsPerPage !== null) {
-      params = params.append('pageNumber', page.toString());
-      params = params.append('pageSize', itemsPerPage.toString());
-    }
-    
-    return this.http.get<Member[]>(this.baseUrl + 'users', {observe: 'response', params}).pipe(
+    params = params.append('pageNumber', pageNumber.toString());
+    params = params.append('pageSize', pageSize.toString());
+
+    return params;
+  }
+
+  private getPaginatedResult<T>(url, params: HttpParams) {
+    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
+
+    return this.http.get<T>(url, {observe: 'response', params}).pipe(
       map(response => {
-        this.paginatedResult.result = response.body;
+        paginatedResult.result = response.body;
         if (response.headers.get('Pagination') !== null) {
-          this.paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
         }
-        return this.paginatedResult;
+        return paginatedResult;
       })
     );
+
   }
 
   getMember(username: string): Observable<Member> {
