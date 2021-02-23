@@ -5,7 +5,7 @@ import { Member } from 'src/app/_models/member';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Photo } from '../_models/photo';
-import { PaginatedResult } from '../_models/pagination';
+import { PaginatedResult, Pagination } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
