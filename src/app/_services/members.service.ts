@@ -13,10 +13,16 @@ import { PaginatedResult, Pagination } from '../_models/pagination';
 export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
+  memberCache = new Map();
   
   constructor(private http: HttpClient) { }
 
   getMembers(UserParams) {
+    var response = this.memberCache.get(Object.values(UserParams).join('-'));
+    if (response) {
+      return of(response);
+    }
+
     let params = this.getPaginationHeaders(UserParams.pageNumber, UserParams.pageSize);
 
     params = params.append('minAge', UserParams.minAge.toString());
@@ -24,7 +30,11 @@ export class MembersService {
     params = params.append('gender', UserParams.gender);
     params = params.append('orderBy', UserParams.orderBy);
     
-    return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params);
+    return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params).pipe(map(result => {
+      this.memberCache.set(Object.values(UserParams).join('-'), result);
+      console.log(this.memberCache);
+      return result;
+    }));
   }
 
   private getPaginationHeaders(pageNumber: number, pageSize: number) {
