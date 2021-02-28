@@ -55,7 +55,7 @@ export class MembersService {
     
     return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params).pipe(map(result => {
       this.memberCache.set(Object.values(UserParams).join('-'), result);
-      console.log(this.memberCache);
+      // console.log(this.memberCache);
       return result;
     }));
   }
@@ -67,6 +67,14 @@ export class MembersService {
     params = params.append('pageSize', pageSize.toString());
 
     return params;
+  }
+
+  addLike(username: string) {
+    return this.http.post(this.baseUrl + 'likes/' + username, {});
+  }
+
+  getLikes(predicate: string) {
+    return this.http.get(this.baseUrl + 'likes?predicate=' + predicate);
   }
 
   private getPaginatedResult<T>(url, params: HttpParams) {
@@ -81,12 +89,11 @@ export class MembersService {
         return paginatedResult;
       })
     );
-
   }
 
   getMember(username: string): Observable<Member> {
     const member = [...this.memberCache.values()].reduce((arr, elem) => arr.concat(elem.result),[]).find((member: Member) => member.username === username);
-    console.log(this.memberCache.values());
+    // console.log(this.memberCache.values());
     if (member) {
       return of (member);
     }
