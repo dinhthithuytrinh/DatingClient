@@ -21,6 +21,7 @@ import { AccountService } from './_services/account.service';
 import { MembersService } from './_services/members.service';
 import { BusyService } from './_services/busy.service';
 import { MessageService } from './_services/message.service';
+import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
@@ -89,7 +90,8 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
     MessageService,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    MemberDetailedResolver
   ],
   bootstrap: [AppComponent]
 })
