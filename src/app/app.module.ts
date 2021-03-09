@@ -8,6 +8,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule} from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +48,7 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import { UserManagementComponent } from './admin/user-management/user-management
     MemberMessagesComponent,
     AdminPanelComponent,
     HasRoleDirective,
-    UserManagementComponent
+    UserManagementComponent,
+    RolesModalComponent
   ],
   imports: [
     CommonModule,
@@ -88,7 +91,8 @@ import { UserManagementComponent } from './admin/user-management/user-management
     NgxSpinnerModule,
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [
     AccountService,
