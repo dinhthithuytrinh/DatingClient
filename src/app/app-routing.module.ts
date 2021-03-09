@@ -7,7 +7,7 @@ import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.gu
 
 import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { HomeComponent } from './home/home.component';
