@@ -21,6 +21,7 @@ import { AccountService } from './_services/account.service';
 import { MembersService } from './_services/members.service';
 import { BusyService } from './_services/busy.service';
 import { MessageService } from './_services/message.service';
+import { AdminService } from './_services/admin.service';
 import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
@@ -94,6 +95,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
     MembersService,
     BusyService,
     MessageService,
+    AdminService,
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
