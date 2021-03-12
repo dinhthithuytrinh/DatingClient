@@ -24,7 +24,7 @@ import { BusyService } from './_services/busy.service';
 import { MessageService } from './_services/message.service';
 import { AdminService } from './_services/admin.service';
 import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
-import { PresenseService } from './_services/presense.service';
+import { PresenceService } from './_services/presence.service';
 
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
@@ -105,7 +105,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     MemberDetailedResolver,
-    PresenseService
+    PresenceService
   ],
   bootstrap: [AppComponent]
 })
